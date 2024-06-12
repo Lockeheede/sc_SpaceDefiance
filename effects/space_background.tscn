@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnr0lm8jo0x7"]
+
+[ext_resource type="Script" path="res://effects/space_background.gd" id="1_wcfdw"]
+[ext_resource type="Texture2D" uid="uid://dbod4b00iqs2o" path="res://assets/space.png" id="1_xgdns"]
+[ext_resource type="Texture2D" uid="uid://dgecfxlpx1phm" path="res://assets/far_stars.png" id="2_7cmbf"]
+[ext_resource type="Texture2D" uid="uid://cytb2b03ldpy3" path="res://assets/close_stars.png" id="3_os220"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_wcfdw")
+
+[node name="SpaceLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="Space" type="TextureRect" parent="SpaceLayer"]
+offset_right = 160.0
+offset_bottom = 240.0
+texture = ExtResource("1_xgdns")
+stretch_mode = 1
+
+[node name="FarStarsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="FarStars" type="TextureRect" parent="FarStarsLayer"]
+offset_right = 160.0
+offset_bottom = 240.0
+texture = ExtResource("2_7cmbf")
+stretch_mode = 1
+
+[node name="CloseStarsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="CloseStars" type="TextureRect" parent="CloseStarsLayer"]
+offset_right = 160.0
+offset_bottom = 240.0
+texture = ExtResource("3_os220")
+stretch_mode = 1

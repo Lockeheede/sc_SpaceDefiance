@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://d020a71ouq7gd"]
+
+[ext_resource type="PackedScene" uid="uid://da61h24gsxfqh" path="res://enemies/enemy.tscn" id="1_du310"]
+[ext_resource type="Texture2D" uid="uid://cwdqckv5u1fhw" path="res://assets/yellow_enemy.png" id="2_8bt4y"]
+[ext_resource type="Script" path="res://enemies/yellow_enemy.gd" id="2_sldws"]
+[ext_resource type="Script" path="res://components/border_bounce_component.gd" id="4_ji2mv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30bcv"]
+atlas = ExtResource("2_8bt4y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qge4c"]
+atlas = ExtResource("2_8bt4y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rmwco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30bcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qge4c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1inj"]
+size = Vector2(16, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhmro"]
+size = Vector2(8, 7)
+
+[node name="YellowEnemy" instance=ExtResource("1_du310")]
+script = ExtResource("2_sldws")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_rmwco")
+autoplay = "default"
+frame_progress = 0.279726
+
+[node name="StatsComponent" parent="." index="1"]
+health = 6
+
+[node name="MoveComponent" parent="." index="2"]
+velocity = Vector2(0, 40)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
+position = Vector2(4.17233e-07, 0)
+scale = Vector2(0.8, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_p1inj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_jhmro")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="ScoreComponent" parent="." index="12"]
+adjust_amount = 10
+
+[node name="BorderBounceComponent" type="Node" parent="." index="13" node_paths=PackedStringArray("actor", "move_component")]
+script = ExtResource("4_ji2mv")
+actor = NodePath("..")
+move_component = NodePath("../MoveComponent")
